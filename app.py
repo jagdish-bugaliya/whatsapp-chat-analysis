@@ -123,13 +123,24 @@ if uploaded_file is not None:
         # most common words
         most_common_df = helper.most_common_words(selected_user,df)
 
-        fig,ax = plt.subplots()
+        # fig,ax = plt.subplots()
 
-        ax.barh(most_common_df[0],most_common_df[1])
-        plt.xticks(rotation='vertical')
+        # ax.barh(most_common_df[0],most_common_df[1])
+        # plt.xticks(rotation='vertical')
 
-        st.title('Most commmon words')
-        st.pyplot(fig)
+        # st.title('Most commmon words')
+        # st.pyplot(fig)
+        if not most_common_df.empty:
+            
+         # Rename columns to ensure string indexing works
+            most_common_df.columns = ['Word', 'Count']
+    
+            fig, ax = plt.subplots()
+            ax.barh(most_common_df['Word'], most_common_df['Count'], color='skyblue')
+            plt.xticks(rotation='vertical')
+            st.pyplot(fig)
+        else:
+            st.warning("No common words found for the selected user.")
 
         # emoji analysis
         emoji_df = helper.emoji_helper(selected_user,df)
