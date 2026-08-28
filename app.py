@@ -108,9 +108,17 @@ if uploaded_file is not None:
         # WordCloud
         st.title("Wordcloud")
         df_wc = helper.create_wordcloud(selected_user,df)
-        fig,ax = plt.subplots()
-        ax.imshow(df_wc)
-        st.pyplot(fig)
+        # fig,ax = plt.subplots()
+        # ax.imshow(df_wc)
+        # st.pyplot(fig)
+        # Check that WordCloud was generated successfully
+        if df_wc is not None:
+            fig, ax = plt.subplots()
+            ax.imshow(df_wc)
+            ax.axis("off")  # Hides the x and y axis numbers
+            st.pyplot(fig)
+       else:
+           st.warning("Not enough text messages available to generate a WordCloud.")
 
         # most common words
         most_common_df = helper.most_common_words(selected_user,df)
