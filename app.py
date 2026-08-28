@@ -76,11 +76,19 @@ if uploaded_file is not None:
             plt.xticks(rotation='vertical')
             st.pyplot(fig)
 
+        # st.title("Weekly Activity Map")
+        # user_heatmap = helper.activity_heatmap(selected_user,df)
+        # fig,ax = plt.subplots()
+        # ax = sns.heatmap(user_heatmap)
+        # st.pyplot(fig)
         st.title("Weekly Activity Map")
         user_heatmap = helper.activity_heatmap(selected_user,df)
-        fig,ax = plt.subplots()
-        ax = sns.heatmap(user_heatmap)
-        st.pyplot(fig)
+        if not user_heatmap.empty and user_heatmap.to_numpy().size > 0:
+            fig, ax = plt.subplots()
+            sns.heatmap(user_heatmap, ax=ax)
+            st.pyplot(fig)
+        else:
+            st.warning("Not enough message data available to generate a heatmap.")
 
         # finding the busiest users in the group(Group level)
         if selected_user == 'Overall':
