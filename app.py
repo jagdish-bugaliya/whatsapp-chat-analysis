@@ -117,8 +117,8 @@ if uploaded_file is not None:
             ax.imshow(df_wc)
             ax.axis("off")  # Hides the x and y axis numbers
             st.pyplot(fig)
-       else:
-           st.warning("Not enough text messages available to generate a WordCloud.")
+        else:
+            st.warning("Not enough text messages available to generate a WordCloud.")
 
         # most common words
         most_common_df = helper.most_common_words(selected_user,df)
